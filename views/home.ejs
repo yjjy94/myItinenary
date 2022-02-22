@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link href="styles/output.css" rel="stylesheet" />
+    <script src="scripts/weather-api.js"></script>
+  </head>
+  <!-- Tailwind Rules = cutomName, Size, Display, Bg, Font  -->
+  <body
+    class="w-screen h-screen flex flex-col items-center justify-start bg-gradient-to-t from-sky-400 to-cyan-200"
+  >
+    <div class="header w-full h-1/4 flex items-center justify-around">
+      <h1 class="font-semibold text-center text-5xl text-whiteGradient">
+        Welcome to Your Itinenary!
+      </h1>
+      <span class="p-10" id="weather-span"></span>
+    </div>
+    <main class="w-10/12 h-3/4">
+      <div class="flex items-center justify-around mt-8">
+        <div class="card-container h-96 w-80 rounded-lg bg-whiteGradientClear">
+          <div class="card-content">
+            <h2 class="p-10">Course One</h2>
+            <a href="/" class="p-10">View Course</a>
+          </div>
+        </div>
+        <div class="card-container h-96 w-80 rounded-xl bg-whiteGradientClear">
+          <div class="card-content">
+            <h2 class="p-10">Course One</h2>
+            <a href="/" class="p-10">View Course</a>
+          </div>
+        </div>
+        <div class="card-container h-96 w-80 rounded-2xl bg-whiteGradientClear">
+          <div class="card-content">
+            <h2 class="p-10">Course One</h2>
+            <a href="/mycourse" class="p-10">View Course</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
