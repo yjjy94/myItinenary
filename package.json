@@ -5,14 +5,14 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "build-css":"npx tailwindcss -i ./src/input.css -o ./public/styles/output.css --watch"
+    "build-css": "npx tailwindcss -i ./src/input.css -o ./public/styles/output.css --watch"
   },
   "author": "John",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "jquery": "^3.6.0",
     "mongodb": "^4.4.0",
     "nodemon": "^2.0.15"
   },

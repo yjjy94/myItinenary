@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+    <link href="styles/output.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="w-screen h-screen flex items-center justify-center">
+      <div class="bg-blue-500 w-1/2 h-3/4 flex items-center justify-center">
+        <form
+          action="/signup"
+          method="POST"
+          class="w-3/5 h-3/4 bg-zinc-300 flex flex-col items-center justify-center"
+        >
+          <div class="bg-teal-500 w-3/4 text-2xl text-left py-5">
+            <label for="email">Email:</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              class="w-auto"
+              required
+            />
+          </div>
+          <div class="bg-teal-500 w-3/4 text-2xl text-left py-5">
+            <label for="confirm-email">Confirm Email:</label>
+            <input
+              type="text"
+              id="confirm-email"
+              name="confirm-email"
+              class="w-auto"
+              required
+            />
+          </div>
+          <div class="bg-red-500 w-3/4 text-2xl text-left py-5">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="w-auto"
+              required
+            />
+          </div>
+          <div class="text-xl w-3/4 text-center py-5">
+            <button class="bg-green-200">Save</button>
+            <!-- <a href="/signup" class="bg-yellow-300">Create an Account</a> -->
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

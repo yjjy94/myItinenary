@@ -3,6 +3,7 @@ const express = require("express");
 const db = require("./database/database");
 const basicRoutes = require("./routes/basic-routes");
 const userRoutes = require("./routes/user-routes");
+const authRoutes = require("./routes/auth-routes");
 const app = express();
 //FOR EJS
 app.set("view engine", "ejs"); //set to use ejs engine for rendering views
@@ -13,6 +14,7 @@ app.use(express.static("public")); //need to set public files or css wont work
 app.use(express.urlencoded({ extended: false })); // for extracting HTML form POST
 app.use(basicRoutes);
 app.use(userRoutes);
+app.use(authRoutes);
 db.connectDb()
   .then(function () {
     app.listen(8888);

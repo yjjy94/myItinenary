@@ -139,7 +139,8 @@ function getListItem(index, places) {
   el.setAttribute("draggable", true);
   el.setAttribute("id", "drag" + index);
   el.setAttribute("ondragstart", "drag(event)");
-
+  el.setAttribute("ondragend", "dragEnd(event)");
+  // el.style.position = "relative";
   if (places.road_address_name) {
     itemStr +=
       "    <div>" +
