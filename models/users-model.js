@@ -9,14 +9,14 @@ class User {
   async newSignUp() {
     console.log("Here new SignUp");
     const securePassword = await bcrypt.hash(this.password, 12);
-    await db.getDB().collection("users").insertOne({
+    await db.getDb().collection("users").insertOne({
       email: this.email,
       password: securePassword,
     });
   }
 
   checkEmail() {
-    return db.getDB().collection("users").findOne({ email: this.email });
+    return db.getDb().collection("users").findOne({ email: this.email });
   }
 
   checkPassword(hashedPassword) {

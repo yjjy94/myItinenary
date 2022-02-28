@@ -6,6 +6,7 @@ function getSignUpView(req, res) {
 
 async function signUp(req, res, next) {
   const data = req.body;
+  const user = new User(data.email, data.password);
   try {
     const existingUser = await user.checkEmail();
     if (existingUser) {
@@ -40,11 +41,17 @@ async function logIn(req, res, next) {
   }
 
   if (!existingUser) {
+    console.log("Cant find user");
+    return next(error);
   }
   //no need for try catch here cuz checkPW is not connecting to db so most likely wont fail
   const checkPassword = await user.checkPassword(existingUser.password);
   if (!checkPassword) {
+    console.log("Wrong password");
+    return next(error);
   }
+
+  res.redirect("/user/home");
 }
 
 module.exports = {

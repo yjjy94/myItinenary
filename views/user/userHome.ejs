@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link href="styles/output.css" rel="stylesheet" />
-    <script src="scripts/weather-api.js"></script>
+    <link href="../styles/output.css" rel="stylesheet" />
+    <script src="../scripts/weather-api.js"></script>
   </head>
   <!-- Tailwind Rules = cutomName, Size, Display, Bg, Font  -->
   <body
@@ -13,7 +13,7 @@
   >
     <div class="header w-full h-1/4 flex items-center justify-around">
       <h1 class="font-semibold text-center text-5xl text-whiteGradient">
-        Welcome to Your Itinenary!
+        Welcome to Your Itinenary Home
       </h1>
       <span class="p-10" id="weather-span"></span>
     </div>
@@ -25,16 +25,18 @@
             <a href="/" class="p-10">View Course</a>
           </div>
         </div>
-        <div class="card-container h-96 w-80 rounded-xl bg-whiteGradientClear">
-          <div class="card-content">
-            <h2 class="p-10">Course One</h2>
-            <a href="/" class="p-10">View Course</a>
-          </div>
-        </div>
+
         <div class="card-container h-96 w-80 rounded-2xl bg-whiteGradientClear">
           <div class="card-content">
             <h2 class="p-10">Course One</h2>
             <a href="/mycourse" class="p-10">View Course</a>
+          </div>
+        </div>
+
+        <div class="card-container h-96 w-80 rounded-2xl bg-whiteGradientClear">
+          <div class="card-content">
+            <h2 class="p-10">Add One</h2>
+            <a href="/newcourse" class="p-10">Add Course</a>
           </div>
         </div>
       </div>

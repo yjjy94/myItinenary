@@ -9,29 +9,38 @@
   </head>
   <!-- Tailwind Rules = cutomName, Size, Display, Bg, Font  -->
   <body
-    class="w-screen h-screen flex flex-col items-center justify-start bg-gradient-to-t from-sky-400 to-cyan-200"
+    class="w-screen h-screen flex items-center justify-around bg-gradient-to-t from-sky-400 to-cyan-200"
   >
-    <div class="header w-full h-1/4 flex items-center justify-around">
-      <h1 class="font-semibold text-center text-5xl text-whiteGradient">
-        Welcome
+    <div class="header h-1/2 flex flex-col items-center justify-center">
+      <h1 class="font-semibold text-center text-6xl text-whiteGradient">
+        Welcome!
       </h1>
-      <span class="p-10" id="weather-span"></span>
-    </div>
-    <main class="w-10/12 h-3/4">
-      <div class="flex items-center justify-around mt-8">
-        <div class="card-container h-96 w-80 rounded-lg bg-whiteGradientClear">
-          <div class="card-content">
-            <h2 class="p-10">Course One</h2>
-            <a href="/" class="p-10">View Course</a>
-          </div>
-        </div>
+      <span class="font-semibold text-center text-3xl text-whiteGradient">
+        Start Creating Your Custom Itinenary!
+      </span>
 
-        <div class="card-container h-96 w-80 rounded-2xl bg-whiteGradientClear">
-          <div class="card-content">
-            <h2 class="p-10">Add One</h2>
-            <a href="/newcourse" class="p-10">Add Course</a>
-          </div>
-        </div>
+      <span class="" id="weather-span"></span>
+    </div>
+
+    <hr class="p-1 py-96 bg-white" />
+
+    <main class="w-1/4 h-1/2">
+      <div
+        class="card-content h-full flex flex-col justify-center items-center rounded-lg bg-whiteGradientClear"
+      >
+        <h2
+          class="p-6 bg-blue-400 text-center font-semibold text-3xl text-whiteGradient"
+        >
+          Log In to start our service!
+        </h2>
+        <a href="/login" class="p-8 bg-teal-200 text-center my-2.5">LogIn</a>
+        <!-- <hr class="p-1 px-auto bg-red-200" /> -->
+        <h2
+          class="p-6 bg-blue-400 text-center font-semibold text-xl text-whiteGradient"
+        >
+          Create an account if you don't have one yet!
+        </h2>
+        <a href="/signup" class="p-8 bg-teal-200 text-center my-2.5">SignUp</a>
       </div>
     </main>
   </body>

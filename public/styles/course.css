@@ -29,3 +29,15 @@
   z-index: -1;
   background-color: rgba(19, 16, 16, 0.507);
 }
+
+#courseList {
+  max-height: 80%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+#courseList li {
+  margin-top: 10px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
