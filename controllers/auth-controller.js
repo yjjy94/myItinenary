@@ -1,4 +1,5 @@
 const User = require("../models/users-model");
+const authUtil = require("../util/authentication");
 
 function getSignUpView(req, res) {
   res.render("user/signup");
@@ -50,13 +51,20 @@ async function logIn(req, res, next) {
     console.log("Wrong password");
     return next(error);
   }
-
-  res.redirect("/user/home");
+  authUtil.createUserSession(req, existingUser, () => {
+    console.log("HERE IN AUTH UTIL");
+  });
+  res.redirect("user/home");
 }
 
+function logOut(req, res) {
+  authUtil.destroyUserAuthSession(req, res);
+  res.redirect("/");
+}
 module.exports = {
   getSignUpView: getSignUpView,
   getLogInView: getLogInView,
   signUp: signUp,
   logIn: logIn,
+  logOut: logOut,
 };

@@ -1,34 +1,27 @@
 function allowDrop(ev) {
   ev.preventDefault();
-  ev.dataTransfer.dropEffect = "copy";
-  console.log(
-    "DRAGOVER: " +
-      ev.dataTransfer.dropEffect +
-      " allowed: " +
-      ev.dataTransfer.effectAllowed
-  );
 }
 
 function drag(ev) {
   ev.dataTransfer.effectAllowed = "copy";
   ev.dataTransfer.setData("text", ev.target.id);
-  let grayOut = document.getElementById("gray-out");
+  const grayOut = document.getElementById("gray-out");
+  const dropBtn = document.getElementById("dropBtn");
   ev.target.style.border = "2px solid gray";
   grayOut.style.zIndex = 2;
-  console.log(
-    "DRAGSTART: " +
-      ev.dataTransfer.dropEffect +
-      " allowed: " +
-      ev.dataTransfer.effectAllowed
-  );
+  dropBtn.innerText = "DROP HERE";
+  dropBtn.classList.toggle("animationPlay");
 }
 function dragEnd(ev) {
   ev.target.style.border = "";
-  let grayOut = document.getElementById("gray-out");
+  const grayOut = document.getElementById("gray-out");
+  const dropBtn = document.getElementById("dropBtn");
   grayOut.style.zIndex = -1;
+  dropBtn.innerText = "SAVE COURSE";
+  dropBtn.classList.toggle("animationPlay");
 }
 function enteredArea(ev) {
-  ev.target.style.background = "teal";
+  ev.target.style.background = "rgb(105, 215, 235)";
 }
 function leftArea(ev) {
   ev.target.style.background = "white";
@@ -36,13 +29,6 @@ function leftArea(ev) {
 
 function drop(ev) {
   ev.preventDefault();
-  // ev.dataTransfer.dropEffect = "copy";
-  console.log(
-    "DROP: " +
-      ev.dataTransfer.dropEffect +
-      " allowed: " +
-      ev.dataTransfer.effectAllowed
-  );
   var data = ev.dataTransfer.getData("text");
   let list = document.getElementById("courseList");
   let element = document.getElementById(data);
@@ -57,7 +43,24 @@ function drop(ev) {
 
   list.appendChild(element);
   addCloseBtnEventListener();
-  // console.log(element);
+}
+
+function addToDataList() {
+  const form = document.getElementById("courseListForm");
+  const places = form.getElementsByClassName("place");
+  const locations = form.getElementsByClassName("location");
+  const courseListData = document.getElementById("courseListData");
+
+  let data = [];
+
+  for (let i = 0; i < places.length; i++) {
+    data.push({
+      placeName: places[i].innerText,
+      placeLocation: locations[i].innerText,
+    });
+  }
+  courseListData.value = JSON.stringify(data);
+  form.submit();
 }
 
 function removeFromList(event) {
@@ -65,11 +68,9 @@ function removeFromList(event) {
   liElement.remove();
 }
 
-function moveBackToKakaoList(element) {}
 function addCloseBtnEventListener() {
   let closeBtns = document.getElementsByClassName("closeBtn");
   for (const closeBtn of closeBtns) {
     closeBtn.addEventListener("click", removeFromList);
   }
-  console.log(closeBtns);
 }

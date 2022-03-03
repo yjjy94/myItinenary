@@ -1,16 +1,18 @@
 const express = require("express");
-const authController = require("../controllers/auth-controller");
+const res = require("express/lib/response");
+const userController = require("../controllers/user-controller");
 const router = express.Router();
 
-router.get("/mycourse", (req, res) => {
+router.get("/user/mycourse", (req, res) => {
   res.render("user/myCourse");
 });
 
-router.get("/newcourse", (req, res) => {
+router.get("/user/newcourse", (req, res) => {
   res.render("user/newcourse");
 });
 
-router.get("/user/home", (req, res) => {
-  res.render("user/userHome");
-});
+router.get("/user/home", userController.getAllUserCourse);
+
+router.post("/user/newcourse", userController.createNewCourse);
+
 module.exports = router;

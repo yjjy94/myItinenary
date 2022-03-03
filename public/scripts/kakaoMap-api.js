@@ -132,7 +132,7 @@ function getListItem(index, places) {
       (index + 1) +
       '"></span>' +
       '<div class="info">' +
-      "   <h5>" +
+      '<h5 class="place">' +
       places.place_name +
       "</h5>";
   // SET THE DRAGGABLE ATTRIBUTE HERE
@@ -143,17 +143,17 @@ function getListItem(index, places) {
   // el.style.position = "relative";
   if (places.road_address_name) {
     itemStr +=
-      "    <div>" +
+      '<div class="location">' +
       places.road_address_name +
       "</div>" +
-      '   <div class="jibun gray">' +
+      '<div class="jibun gray">' +
       places.address_name +
       "</div>";
   } else {
-    itemStr += "    <div>" + places.address_name + "</div>";
+    itemStr += '<div class="location">' + places.address_name + "</div>";
   }
 
-  itemStr += '  <span class="tel">' + places.phone + "</span>" + "</div>";
+  itemStr += '<span class="tel">' + places.phone + "</span>" + "</div>";
 
   el.innerHTML = itemStr;
   el.className = "item";

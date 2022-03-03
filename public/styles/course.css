@@ -9,11 +9,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: white;
   /* z-index: 10; */
-}
-.drop-span {
-  left: 24%;
-  border-radius: 5px;
 }
 
 .closeBtn {
@@ -24,7 +21,18 @@
   font-size: 1rem;
   padding: 2px 3px;
   border-radius: 2px;
+  /* color: rgba(0, 255, 255, 0.87); */
 }
+#dropBtn {
+  left: 24%;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px 1px rgba(175, 240, 248, 0.829);
+}
+#dropBtn.animationPlay {
+  animation: bounce 1s ease-in infinite;
+  box-shadow: 0 0 1rem 1rem rgb(105, 215, 235);
+}
+
 #gray-out {
   z-index: -1;
   background-color: rgba(19, 16, 16, 0.507);
@@ -40,4 +48,16 @@
   margin-top: 10px;
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
