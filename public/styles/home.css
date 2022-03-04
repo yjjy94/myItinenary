@@ -1,0 +1,82 @@
+#weather-span .icon {
+  max-height: 100%;
+  height: 100%;
+}
+
+.menu-item-container {
+  width: 19.5rem;
+  height: 5rem;
+}
+
+.menu-item {
+  padding: 0.3rem 6.5rem;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+/* FOR SLIDER */
+.course-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  /* margin: 50px auto 0; */
+  width: 30%;
+  height: 70%;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+.controls div {
+  padding: 12px 14px;
+  cursor: pointer;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 5px;
+  border-radius: 10px;
+}
+.controls div.disabled {
+  opacity: 0;
+  cursor: default;
+}
+
+.course-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.course-slide {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 80%;
+  height: 50%;
+  background-color: red;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  opacity: 0;
+  transition: all 0.7s ease-out;
+}
+
+.course-slide--active {
+  opacity: 1;
+  z-index: 9;
+}
+
+.prev,
+.next {
+  opacity: 0.3;
+}
+
+.prev {
+  transform: translate(0, -30%) scale(0.8);
+}
+
+.next {
+  transform: translate(0, 30%) scale(0.8);
+}
