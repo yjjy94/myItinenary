@@ -1,9 +1,9 @@
 const User = require("../models/users-model");
 const authUtil = require("../util/authentication");
 
-function getSignUpView(req, res) {
-  res.render("user/signup");
-}
+// function getSignUpView(req, res) {
+//   res.render("user/signup");
+// }
 
 async function signUp(req, res, next) {
   const data = req.body;
@@ -12,7 +12,7 @@ async function signUp(req, res, next) {
     const existingUser = await user.checkEmail();
     if (existingUser) {
       console.log("User name already in use");
-      res.redirect("user/signup");
+      res.redirect("/");
       return;
     }
 
@@ -22,12 +22,12 @@ async function signUp(req, res, next) {
     return next(error);
   }
 
-  res.redirect("/login");
+  res.redirect("/");
 }
 
-function getLogInView(req, res) {
-  res.render("user/login");
-}
+// function getLogInView(req, res) {
+//   res.render("user/login");
+// }
 
 async function logIn(req, res, next) {
   // console.log("LOGIN IS " + res.locals.csrfToken);
@@ -52,18 +52,19 @@ async function logIn(req, res, next) {
     return next(error);
   }
   authUtil.createUserSession(req, existingUser, () => {
-    console.log("HERE IN AUTH UTIL");
+    console.log("HERE IN AUTH UTIL createUserSession");
   });
   res.redirect("user/home");
 }
 
 function logOut(req, res) {
+  console.log("HERE IN LOG OUT");
   authUtil.destroyUserAuthSession(req, res);
   res.redirect("/");
 }
 module.exports = {
-  getSignUpView: getSignUpView,
-  getLogInView: getLogInView,
+  // getSignUpView: getSignUpView,
+  // getLogInView: getLogInView,
   signUp: signUp,
   logIn: logIn,
   logOut: logOut,

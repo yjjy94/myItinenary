@@ -6,6 +6,7 @@ function createUserSession(req, user, action) {
 }
 
 function destroyUserAuthSession(req, res) {
+  console.log("SESSION DESTROYED");
   req.session.uid = null; // to delete the session data when logged out
 }
 module.exports = {

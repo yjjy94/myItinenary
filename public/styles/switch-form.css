@@ -1,0 +1,16 @@
+/* FOR BUTTONS ON FORM */
+
+/* FOR BUTTONS ON FORM */
+.show {
+  animation: slidein 1.2s ease forwards;
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: 150%;
+  }
+
+  100% {
+    margin-left: 0%;
+  }
+}

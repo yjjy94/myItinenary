@@ -7,7 +7,7 @@ function checkAuthStatus(req, res, next) {
 
   res.locals.uid = uid;
   res.locals.isAuth = true;
-  console.log("CHECK AUTH SESSION");
+
   next();
 }
 

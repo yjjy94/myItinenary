@@ -1,4 +1,4 @@
-<%- include('../includes/head', { pageTitle: 'New Course' }) %>
+<%- include('../includes/head', { pageTitle: 'Update Course' }) %>
     <link href="/styles/map.css" rel="stylesheet" />
     <link href="/styles/course.css" rel="stylesheet" />
     <script
@@ -24,7 +24,7 @@
         <!-- FORM HERE -->
         <form
           class="w-full h-full"
-          action="/user/newcourse"
+          action="/user/<%=courseId%>/update"
           method="POST"
           id="courseListForm"
         >
@@ -33,13 +33,45 @@
             type="text"
             name="title"
             id="title"
-            class="relative"
-            value="New Course(title)"
+            class=""
+            value="<%= courseList.title %> "
           />
           <ul
             id="courseList"
             class="w-full h-5/6 max-h-96 lg:h-3/4 flex flex-col justify-start items-center"
-          ></ul>
+          >
+            <% for(const list of courseList.list){ %>
+            <li class="item" style="position: relative">
+              <span class="markerbg marker_1"></span>
+              <div class="info">
+                <h5 class="place"><%=list.placeName%></h5>
+                <input
+                  class="placeurl"
+                  type="hidden"
+                  name="placeUrl"
+                  value="<%=list.placeUrl%>"
+                />
+                <input
+                  class="longx"
+                  type="hidden"
+                  name="longX"
+                  value="<%=list.longX%>"
+                />
+                <input
+                  class="laty"
+                  type="hidden"
+                  name="latY"
+                  value="<%=list.latY%>"
+                />
+                <div class="location"><%=list.placeLocation%></div>
+              </div>
+              <button class="closeBtn" onclick="removeFromList(event)">
+                X
+              </button>
+            </li>
+
+            <% } %>
+          </ul>
           <!-- FOR THE DATA TO BE SENT -->
           <input type="hidden" name="list" id="courseListData" value="" />
           <!-- FOR THE DATA TO BE SENT -->
@@ -65,7 +97,7 @@
       </aside>
 
       <div class="map_wrap w-full lg:w-2/3 h-1/2 lg:h-full relative">
-        <div class="map w-full h-full z-10" id="map"></div>
+        <div class="map w-full h-full" id="map"></div>
         <div id="menu_wrap">
           <div class="option">
             <form onsubmit="searchPlaces(); return false;">

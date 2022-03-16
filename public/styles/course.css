@@ -1,28 +1,19 @@
-.course li {
-  font-size: 1rem;
-  border: 2px solid white;
-  border-radius: 10px;
-  margin-bottom: 5px;
-  height: 15%;
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  /* z-index: 10; */
+.course #title:focus {
+  border: 2px solid rgba(73, 186, 252, 0.911);
+  box-shadow: 0 0px 5px 5px rgba(73, 186, 252, 0.911);
 }
 
 .closeBtn {
   position: absolute;
-  top: 5px;
+  top: -2px;
   right: 5px;
-  border: 2px solid white;
-  font-size: 1rem;
+  border: none;
+  font-size: 0.8rem;
   padding: 2px 3px;
   border-radius: 2px;
   /* color: rgba(0, 255, 255, 0.87); */
 }
+
 #dropBtn {
   left: 24%;
   border-radius: 5px;
@@ -45,9 +36,59 @@
 }
 
 #courseList li {
-  margin-top: 10px;
+  margin-top: 3px;
   flex-grow: 0;
   flex-shrink: 0;
+  font-size: 0.8rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  height: fit-content;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+#button-container {
+  position: relative;
+  bottom: 3rem;
+}
+#hr {
+  position: relative;
+  bottom: -2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  #button-container {
+    bottom: 0;
+  }
+  #courseList {
+    margin-top: 2rem;
+  }
+  .course #title {
+    position: relative;
+    top: 1rem;
+    left: 25%;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    outline: none;
+  }
+  #courseList li {
+    margin-top: 10px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  #button-container {
+    bottom: 2rem;
+  }
+  #hr {
+    bottom: 0;
+  }
 }
 
 @keyframes bounce {

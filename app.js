@@ -7,6 +7,7 @@ const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 const basicRoutes = require("./routes/basic-routes");
 const userRoutes = require("./routes/user-routes");
 const authRoutes = require("./routes/auth-routes");
+const courseRoutes = require("./routes/course-routes");
 const app = express();
 //FOR EJS
 app.set("view engine", "ejs"); //set to use ejs engine for rendering views
@@ -24,6 +25,7 @@ app.use(checkAuthStatusMiddleware);
 app.use(basicRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(courseRoutes);
 
 db.connectDb()
   .then(function () {

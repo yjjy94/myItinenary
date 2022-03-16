@@ -7,12 +7,9 @@ async function getWeather() {
       "http://api.openweathermap.org/data/2.5/weather?lat=33.5097&lon=126.5219&appid=6f52dd6e18a33b27eeb952e9a1bc76f5&units=metric"
     );
     let result = await apiResponse.json();
-    console.log(result);
     todayWeather = result.weather[0].main;
-    // todayWeather = "Rain";
     todayTemp = result.main.temp;
     console.log(todayWeather);
-    console.log(todayTemp);
   } catch (error) {
     console.log(error);
   }
@@ -23,7 +20,7 @@ async function getWeather() {
   } else if (todayWeather.includes("Clear")) {
     document.getElementById("weather-span").innerHTML =
       "<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>";
-  } else if (todayWeather.includes("Clouds")) {
+  } else if (todayWeather.includes("Clouds") || todayWeather.includes("Mist")) {
     document.getElementById("weather-span").innerHTML =
       "<div class='icon cloudy'><div class='cloud'></div><div class='cloud'></div></div>";
   } else if (todayWeather.includes("Snow")) {
@@ -33,6 +30,11 @@ async function getWeather() {
     document.getElementById("weather-span").innerHTML =
       "<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>";
   }
+  let temp = document.createElement("span");
+  temp.classList.add("temperature");
+  temp.innerText = Math.round(todayTemp) + "\xB0C";
+
+  document.getElementById("weather-span").appendChild(temp);
 }
 
 getWeather();

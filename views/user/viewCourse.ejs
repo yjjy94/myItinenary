@@ -1,0 +1,50 @@
+<%- include('../includes/head', { pageTitle: 'View Course' }) %>
+    <link href="../../styles/menu.css" rel="stylesheet" />
+    <link href="../../styles/map-overlay.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a20821a7be4bd080f285fbe1267c0220&libraries=services"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/f4c130c395.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../scripts/menu-controller.js" defer></script>
+    <script src="../../scripts/kakaoMap-courseView.js" defer></script>
+  </head>
+  <body class="w-screen h-screen bg-gradient-to-t from-sky-400 to-cyan-200">
+
+    <main
+      class="w-screen h-screen lg:flex items-center justify-around"
+      id="main"
+    >
+     
+      
+    <nav
+    class="navbar !absolute lg:h-1/2 lg:w-80 rounded-lg bg-whiteGradientClear"
+    id="navbarViewCourse"
+    >
+    <div class="container nav-container lg:!h-full lg:w-full">
+      <input class="checkbox" type="checkbox" onchange="openCloseMenuViewCourse()" name="" id="hamburger-checkbox" /></input>
+      <div class="hamburger-lines" id="hamburger">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+        <span class="line line3"></span>
+      </div>  
+    <div class="menu-items hidden lg:h-full lg:w-full lg:flex flex-col justify-center items-center">
+      <li><a href="/user/home" class="py-1 px-24">Home</a></li>
+      <li><a href="#" class="py-1 px-24">About</a></li>
+      <li><a href="/user/<%= courseId %>/update" class="py-1 px-14">Update Course</a></li>
+      <li><button onclick="deleteCourse()" class="py-1 px-14">Delete Course</button></li>
+      <li><a href="/logout" class="py-1 px-20">Log Out</a></li>
+    </div>
+  </div>
+</div>
+</nav>
+
+<hr class="hidden lg:flex lg:py-96 lg:px-1 bg-white" />
+      <input type="hidden" value="<%= courseId %>" id="courseId"></input>
+      <div class="w-full h-full lg:w-1/2 lg:h-4/5" id="map"></div>
+    </main>
+  </body>
+</html>

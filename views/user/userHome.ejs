@@ -1,93 +1,92 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link href="../styles/output.css" rel="stylesheet" />
-    <link href="../styles/home.css" rel="stylesheet" />
+<%- include('../includes/head', { pageTitle: 'User Home' }) %>
+<link href="../styles/menu.css" rel="stylesheet" />
+<link href="../styles/weather.css" rel="stylesheet" />
+<link href="../styles/slider.css" rel="stylesheet" />
     <script
       src="https://kit.fontawesome.com/f4c130c395.js"
       crossorigin="anonymous"
       defer
     ></script>
-    <script src="../scripts/weather-api.js"></script>
-    <script src="../scripts/slider.js"></script>
+    <script src="../scripts/weather-api.js" defer></script>
+    <script src="../scripts/menu-controller.js" defer></script>
+    <script src="../scripts/slider.js" defer></script>
   </head>
   <!-- Tailwind Rules = cutomName, Size, Display, Bg, Font  -->
-  <!-- <body
-    class="w-screen h-screen flex flex-col items-center justify-start bg-gradient-to-t from-sky-400 to-cyan-200"
-  > -->
-
   <body class="w-screen h-screen bg-gradient-to-t from-sky-400 to-cyan-200">
     <header
-      class="header w-full h-1/5 flex items-center justify-around bg-green-500"
+      class="header w-full h-1/5 flex items-center justify-around"
     >
-      <h1 class="font-semibold text-center text-5xl text-whiteGradient">
-        Welcome to Your Itinenary Home
+      <h1 class="font-semibold text-center text-2xl lg:text-5xl text-whiteGradient">
+        Welcome to Your Itinenary!
       </h1>
-      <span class="max-h-24" id="weather-span"></span>
+      <span class="weather-span-userhome max-h-24" id="weather-span"></span>
     </header>
 
     <main
-      class="w-screen h-3/4 flex flex-wrap items-center justify-evenly mt-8"
+      class="w-screen h-3/4 relative lg:flex lg:flex-row items-center justify-evenly mt-8"
       id="main"
     >
-      <nav
-        class="card-container h-96 w-80 flex flex-col rounded-lg justify-center items-center bg-whiteGradientClear"
-      >
-        <h1>MENU</h1>
-        <div
-          class="menu-item-container bg-gray-500 relative text-center mb-5 border-y-2 border-y-gray-400"
-        >
-          <a href="/user/newcourse" class="menu-item bg-red-200">
-            Add Course
-            <i class="fas fa-map-marker-alt text-blue-300 text-2xl"></i>
-          </a>
-        </div>
-        <div
-          class="menu-item-container bg-gray-500 relative text-center mb-5 border-y-2 border-y-gray-400"
-        >
-          <a href="/logout" class="menu-item bg-green-500">
-            Add Course
-            <i class="fas fa-map-marker-alt text-blue-300 text-2xl"></i>
-          </a>
-        </div>
-        <div
-          class="menu-item-container bg-gray-500 relative text-center mb-5 border-y-2 border-y-gray-400"
-        >
-          <a href="/logout" class="menu-item">
-            Log Out
-            <i class="fas fa-map-marker-alt text-blue-300 text-2xl"></i>
-          </a>
-        </div>
-      </nav>
 
-      <hr class="p-1 py-80 bg-white" />
+    <!-- FOR NAV MENU -->
+      <nav
+        class="navbar lg:h-1/2 lg:w-80 lg:open rounded-lg bg-whiteGradientClear"
+        id="navbar"
+        >
+        <div class="container nav-container lg:!h-full lg:w-full">
+          <input class="checkbox " type="checkbox" onchange="openCloseMenu()" name="" id="hamburger-checkbox" /></input>
+          <div class="hamburger-lines" id="hamburger">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+          </div>  
+        <div class="menu-items hidden lg:h-full lg:w-full lg:flex flex-col justify-center items-center">
+          <li><a href="/user/home" class="py-1 px-24">Home</a></li>
+          <li><a href="#" class="py-1 px-24">About</a></li>
+          <li><a href="/user/newcourse" class="py-1 px-14">New Course</a></li>
+          <li><a href="/user/viewcourse/" id="viewCourseLink" class="py-1 px-14">View Course</a></li>
+          <li><a href="/logout" class="py-1 px-20">Log Out</a></li>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+      <hr class="hidden lg:inline lg:py-80 lg:px-1 bg-white" />
       <!-- For Lists retrieved from DB -->
-      <div class="course-container w-">
-        <div class="course-slider">
-          <% for(const course of allCourses) {%>
-          <div class="course-slide h-96 w-80 rounded-lg bg-whiteGradientClear">
-            <div class="course-content">
-              <h2 class="p-10"><%= course.title%></h2>
-              <ul class="course-list">
-                <% for(const list of course.list) {%>
-                <li class="course-details">
-                  <h3><%= list.placeName %></h3>
-                  <h3><%= list.placeLocation %></h3>
-                </li>
-                <% } %>
-              </ul>
-              <a href="/" class="p-10">View Course</a>
-            </div>
+      <div class="course-container w-full h-4/5 lg:w-1/3">
+        <% if(allCourses.length > 0){ %>
+          <div class="course-slider">
+            <% for(const course of allCourses) {%>
+              <div class="course-slide h-full w-4/5 rounded-lg bg-whiteGradientClear">
+                <div class="course-content h-full ">
+                  <h2 class="text-2xl py-4 text-center border-solid border-sky-400 border-b-4"><%= course.title%></h2>
+                  <ul class="course-list">
+                    <% for(const list of course.list) {%>
+                    <li class="course-details w-full py-4 text-center border-solid border-sky-400 border-b-2">
+                      <a href="<%=list.placeUrl%> " target="_blank">
+                        <h3><%= list.placeName %></h3>
+                        <h3><%= list.placeLocation %></h3>
+                      </a>
+                    </li>
+                    <% } %>
+                  </ul>
+                    <input id="courseId" type="hidden" value="<%=course._id%>"></input>           
+                </div>
+              </div>
+            <% } %>
           </div>
-          <% } %>
-        </div>
-        <div class="controls">
-          <div id="back">Back</div>
-          <div id="forvard">Forvard</div>
-        </div>
+            <div class="controls mt-10">
+              <div id="back">Back</div>
+              <div id="forward">Forward</div>
+            </div>
+        <% } else {%> 
+          <div class="course-content bg-whiteGradientClear rounded-2xl h-full">
+            <img src="../assets/notfound.PNG" alt="" class="ml-20 p-0" >
+            <h1 class="text-4xl text-center font-bold text-blue-400 mt-8">
+              You Don't Have Any Course!<br>
+              Try Creating One! 
+              </h1>
+          </div>
+          <% } %> 
       </div>
     </main>
   </body>

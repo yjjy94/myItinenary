@@ -4,65 +4,82 @@ const mongodb = require("mongodb");
 const req = require("express/lib/request");
 
 class Course {
-  constructor(title, courseListData, uid) {
-    this.title = title;
-    this.list = courseListData;
-    this.uid = uid;
+  constructor(courseData, sessionUid, updateCourseID) {
+    this.title = courseData.title;
+    this.list = courseData.list;
+    this.uid = sessionUid;
+    this.updateCourseID = updateCourseID;
   }
 
-  // static async findById(productId) {
-  //   let prodId;
-  //   try {
-  //     prodId = new mongodb.ObjectId(productId);
-  //   } catch (error) {
-  //     error.code = 404;
-  //     throw error;
-  //   }
+  static async findById(courseId) {
+    let objectCourseId;
+    try {
+      objectCourseId = new mongodb.ObjectId(courseId);
+    } catch (error) {
+      error.code = 404;
+      throw error;
+    }
 
-  //   const product = await db
-  //     .getDB()
-  //     .collection("products")
-  //     .findOne({ _id: prodId });
-  //   if (!product) {
-  //     const error = new Error("Could not find product..");
-  //     error.code = 404;
-  //     throw error;
-  //   }
-  //   return new Product(product);
-  // }
+    const resultCourse = await db
+      .getDb()
+      .collection("courses")
+      .findOne({ _id: objectCourseId });
+    if (!resultCourse) {
+      const error = new Error("Could not find product..");
+      error.code = 404;
+      throw error;
+    }
+
+    return new Course(resultCourse);
+  }
 
   static async findAll(userId) {
+    console.log(userId);
     const allCourse = await db
       .getDb()
       .collection("courses")
       .find({ user_id: userId })
       .toArray();
-    //create a new instance for each course
-    return allCourse.map((courseDoc) => {
-      // console.log(courseDoc);
-      return new Course(courseDoc.title, courseDoc.list);
-    });
+
+    return allCourse;
+  }
+
+  static async deleteById(paramId) {
+    const courseId = new mongodb.ObjectId(paramId);
+    await db.getDb().collection("courses").deleteOne({ _id: courseId });
+  }
+
+  static async deleteById(paramId) {
+    const courseId = new mongodb.ObjectId(paramId);
+    await db.getDb().collection("courses").deleteOne({ _id: courseId });
   }
 
   async save() {
-    // console.log("HERE IN COURSE MODEL SAVE");
-    // console.log(this.list);
     const addCourse = {
       title: this.title,
       list: JSON.parse(this.list),
       user_id: this.uid,
     };
     await db.getDb().collection("courses").insertOne(addCourse);
-    // console.log("COURSE SAVED");
+    console.log("SAVE SUCCESS");
+    console.log(addCourse);
   }
 
-  async checkData() {
-    // console.log("HERE DATA");
-    // console.log(this.list);
-  }
-  async delete() {
-    const prodId = new mongodb.ObjectId(this.id);
-    await db.getDB().collection("products").deleteOne({ _id: prodId });
+  async updateById(productId) {
+    const addCourse = {
+      title: this.title,
+      list: JSON.parse(this.list),
+      user_id: this.uid,
+    };
+    let updateId = new mongodb.ObjectId(this.updateCourseID);
+    await db.getDb().collection("courses").updateOne(
+      { _id: updateId },
+      {
+        $set: addCourse,
+      }
+    );
+    console.log("UPDATE SUCCESS");
+    console.log(addCourse);
   }
 }
 

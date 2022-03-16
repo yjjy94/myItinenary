@@ -24,7 +24,7 @@ function setupKakaoMap(lat, long) {
   var mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapOption = {
       center: new kakao.maps.LatLng(lat, long), // 지도의 중심좌표
-      level: 3, // 지도의 확대 레벨
+      level: 1, // 지도의 확대 레벨
     };
   console.log("MAKE MAP");
   // 지도를 생성합니다
@@ -47,7 +47,9 @@ function searchPlaces() {
   }
 
   // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-  ps.keywordSearch(keyword, placesSearchCB);
+  let res = ps.keywordSearch(keyword, placesSearchCB);
+  console.log(res);
+  return true;
 }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -134,13 +136,28 @@ function getListItem(index, places) {
       '<div class="info">' +
       '<h5 class="place">' +
       places.place_name +
-      "</h5>";
+      "</h5>" +
+      '<input class="placeurl" type="hidden" name="placeUrl" value="' +
+      places.place_url +
+      '"/>' +
+      '<input class="longx" type="hidden" name="longX" value="' +
+      places.x +
+      '" />' +
+      '<input class="laty" type="hidden" name="latY" value="' +
+      places.y +
+      '" />';
   // SET THE DRAGGABLE ATTRIBUTE HERE
   el.setAttribute("draggable", true);
   el.setAttribute("id", "drag" + index);
   el.setAttribute("ondragstart", "drag(event)");
   el.setAttribute("ondragend", "dragEnd(event)");
-  // el.style.position = "relative";
+  el.setAttribute("onclick", `panTo(${places.y},${places.x})`);
+  if (window.innerWidth < 1000) {
+    onLongPress(el, () => {
+      addToCourseList(el);
+    });
+  }
+
   if (places.road_address_name) {
     itemStr +=
       '<div class="location">' +
@@ -161,6 +178,52 @@ function getListItem(index, places) {
   return el;
 }
 
+function onLongPress(element, callback) {
+  let timer;
+
+  element.addEventListener("touchstart", () => {
+    timer = setTimeout(() => {
+      timer = null;
+      callback();
+    }, 500);
+  });
+
+  function cancel() {
+    clearTimeout(timer);
+  }
+  element.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+  element.addEventListener("touchend", cancel);
+  element.addEventListener("touchmove", cancel);
+}
+
+function addToCourseList(el) {
+  let data = el.closest("li").id;
+  console.log(data);
+  console.log("addToCourseList");
+  let list = document.getElementById("courseList");
+  let element = document.getElementById(data);
+  let closeBtn = document.createElement("button");
+  closeBtn.innerHTML = "X"; //add a X button on li
+  closeBtn.setAttribute("class", "closeBtn"); //add X button classname
+  el.style.background = "white";
+  element.appendChild(closeBtn);
+  element.setAttribute("id", "");
+  element.style.position = "relative";
+  list.appendChild(element);
+  addCloseBtnEventListener();
+}
+
+//마커를 부드럽게 선택지역으로 이동
+function panTo(latY, longX) {
+  // 이동할 위도 경도 위치를 생성합니다
+  var moveLatLon = new kakao.maps.LatLng(latY, longX);
+
+  // 지도 중심을 부드럽게 이동시킵니다
+  // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+  map.panTo(moveLatLon);
+}
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
   var imageSrc =
@@ -239,6 +302,3 @@ function removeAllChildNods(el) {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, options);
-// 키워드로 장소를 검색합니다
-// searchPlaces();
-//

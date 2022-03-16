@@ -15,7 +15,7 @@ const nextSlide = () => {
 };
 
 const renderBtns = () => {
-  let nextBtn = document.querySelector("#forvard");
+  let nextBtn = document.querySelector("#forward");
   let prevBtn = document.querySelector("#back");
 
   let activeSlide = document.querySelector(".course-slide--active");
@@ -44,14 +44,20 @@ const prevSlide = () => {
 
 const renderSlides = () => {
   let slides = document.querySelectorAll(".course-slide");
+  let viewCourseLink = document.getElementById("viewCourseLink");
   if (!slides) {
     return;
   }
   let activeSlide = document.querySelector(".course-slide--active");
+
   if (!activeSlide) {
     activeSlide = slides.item(0);
     activeSlide.classList.add("course-slide--active");
   }
+
+  let courseId = activeSlide.querySelector("#courseId").value;
+  viewCourseLink.href = `/user/viewcourse/${courseId}`;
+
   [].forEach.call(slides, function (slide) {
     slide.classList.remove("prev", "next");
   });
@@ -66,7 +72,8 @@ const renderSlides = () => {
 const renderSlider = (element) => {
   const slider = document.querySelector(element);
   if (slider) {
-    let nextButton = document.querySelector("#forvard");
+    let nextButton = document.querySelector("#forward");
+
     nextButton.addEventListener("click", function () {
       nextSlide();
     });

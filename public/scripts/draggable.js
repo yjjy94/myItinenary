@@ -2,16 +2,6 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
-function drag(ev) {
-  ev.dataTransfer.effectAllowed = "copy";
-  ev.dataTransfer.setData("text", ev.target.id);
-  const grayOut = document.getElementById("gray-out");
-  const dropBtn = document.getElementById("dropBtn");
-  ev.target.style.border = "2px solid gray";
-  grayOut.style.zIndex = 2;
-  dropBtn.innerText = "DROP HERE";
-  dropBtn.classList.toggle("animationPlay");
-}
 function dragEnd(ev) {
   ev.target.style.border = "";
   const grayOut = document.getElementById("gray-out");
@@ -25,6 +15,17 @@ function enteredArea(ev) {
 }
 function leftArea(ev) {
   ev.target.style.background = "white";
+}
+
+function drag(ev) {
+  ev.dataTransfer.effectAllowed = "copy";
+  ev.dataTransfer.setData("text", ev.target.id);
+  const grayOut = document.getElementById("gray-out");
+  const dropBtn = document.getElementById("dropBtn");
+  ev.target.style.border = "2px solid gray";
+  grayOut.style.zIndex = 2;
+  dropBtn.innerText = "DROP HERE";
+  dropBtn.classList.toggle("animationPlay");
 }
 
 function drop(ev) {
@@ -48,7 +49,14 @@ function drop(ev) {
 function addToDataList() {
   const form = document.getElementById("courseListForm");
   const places = form.getElementsByClassName("place");
+
+  if (!places || places.length <= 0) {
+    return alert("NO LIST TO SAVE!");
+  }
   const locations = form.getElementsByClassName("location");
+  const urls = form.getElementsByClassName("placeurl");
+  const longXs = form.getElementsByClassName("longx");
+  const latYs = form.getElementsByClassName("laty");
   const courseListData = document.getElementById("courseListData");
 
   let data = [];
@@ -57,9 +65,13 @@ function addToDataList() {
     data.push({
       placeName: places[i].innerText,
       placeLocation: locations[i].innerText,
+      placeUrl: urls[i].value,
+      longX: longXs[i].value,
+      latY: latYs[i].value,
     });
   }
   courseListData.value = JSON.stringify(data);
+  console.log(courseListData.value);
   form.submit();
 }
 

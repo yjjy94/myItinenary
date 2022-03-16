@@ -1,0 +1,14 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Barlow&family=Fredoka&family=Montserrat&family=Oswald&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=Fredoka&family=Montserrat&family=Oswald&family=Oxygen&display=swap");
+html {
+  box-sizing: border-box;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden;
+  font-family: "Oxygen", sans-serif;
+}
+html *,
+html *:before,
+html *:after {
+  box-sizing: inherit;
+}
