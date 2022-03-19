@@ -11,6 +11,7 @@ if (process.env.MONGODB_URL) {
 let database;
 
 async function connectDb() {
+  console.log("connectDb  " + mongdbUrl);
   const client = await MongoClient.connect(mongdbUrl);
   database = client.db("my-itinenary");
   console.log("DB CONNECTED");
