@@ -14,14 +14,13 @@ function createSessionStore() {
 }
 
 function createSessionConfig() {
-  console.log("SESSION SESSION CREATE");
   return {
     secret: "super-secret",
     resave: false,
     saveUninitialized: false,
     store: createSessionStore(),
     cookie: {
-      maxAge: 24 * 2 * 60 * 60 * 1000,
+      maxAge: 2 * 60 * 60 * 1000,
     },
   };
 }

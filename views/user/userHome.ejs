@@ -12,7 +12,7 @@
     <script src="../scripts/slider.js" defer></script>
   </head>
   <!-- Tailwind Rules = cutomName, Size, Display, Bg, Font  -->
-  <body class="w-screen h-screen bg-gradient-to-t from-sky-400 to-cyan-200">
+  <body class="w-screen h-screen flex flex-col justify-center items-center bg-gradient-to-t from-sky-400 to-cyan-200">
     <header
       class="header w-full h-1/5 flex items-center justify-around"
     >
@@ -41,9 +41,11 @@
           </div>  
         <div class="menu-items hidden lg:h-full lg:w-full lg:flex flex-col justify-center items-center">
           <li><a href="/user/home" class="py-1 px-24">Home</a></li>
-          <li><a href="#" class="py-1 px-24">About</a></li>
+          <!-- <li><a href="#" class="py-1 px-24">About</a></li> -->
           <li><a href="/user/newcourse" class="py-1 px-14">New Course</a></li>
-          <li><a href="/user/viewcourse/" id="viewCourseLink" class="py-1 px-14">View Course</a></li>
+          <% if(allCourses.length > 0){ %>
+          <li><a href="/user/viewcourse/" id="viewCourseLink" class="py-1 px-14">View Course</a><h3 id="viewCourseTitle" class="text-xl"></h3></li>
+          <% } %> 
           <li><a href="/logout" class="py-1 px-20">Log Out</a></li>
         </div>
       </div>
@@ -58,7 +60,7 @@
             <% for(const course of allCourses) {%>
               <div class="course-slide h-full w-4/5 rounded-lg bg-whiteGradientClear">
                 <div class="course-content h-full ">
-                  <h2 class="text-2xl py-4 text-center border-solid border-sky-400 border-b-4"><%= course.title%></h2>
+                  <h2 class="text-2xl py-4 text-center border-solid border-sky-400 border-b-4" id="courseTitle"><%= course.title%></h2>
                   <ul class="course-list">
                     <% for(const list of course.list) {%>
                     <li class="course-details w-full py-4 text-center border-solid border-sky-400 border-b-2">
@@ -75,13 +77,13 @@
             <% } %>
           </div>
             <div class="controls mt-10">
-              <div id="back">Back</div>
-              <div id="forward">Forward</div>
+              <div class="bg-cyan-500" id="back">Back</div>
+              <div class="bg-cyan-500" id="forward">Forward</div>
             </div>
         <% } else {%> 
-          <div class="course-content bg-whiteGradientClear rounded-2xl h-full">
-            <img src="../assets/notfound.PNG" alt="" class="ml-20 p-0" >
-            <h1 class="text-4xl text-center font-bold text-blue-400 mt-8">
+          <div class="course-content bg-whiteGradientClear rounded-2xl lg:h-full">
+            <img src="../assets/notfound.PNG" alt="" class="lg:ml-20 p-0" >
+            <h1 class="text-xl lg:text-4xl text-center font-bold text-blue-400 mt-4 lg:mt-8">
               You Don't Have Any Course!<br>
               Try Creating One! 
               </h1>

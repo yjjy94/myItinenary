@@ -12,7 +12,6 @@ function getViewCourseView(req, res, next) {
 }
 
 async function getUpdateCourseView(req, res, next) {
-  console.log("getUpdateCourseView");
   if (checkAuth(res)) {
     try {
       let courseId = new mongodb.ObjectId(req.params.id);
@@ -23,10 +22,10 @@ async function getUpdateCourseView(req, res, next) {
         courseId: req.params.id,
       });
     } catch (error) {
-      next(error);
+      res.redirect("/user/home");
     }
   } else {
-    res.redirect("/");
+    return res.redirect("/");
   }
 }
 
@@ -37,7 +36,7 @@ async function getCourseDetailsClient(req, res, next) {
     res.json(course);
   } catch (error) {
     error.code = 404;
-    next(error);
+    return next(error);
   }
 }
 

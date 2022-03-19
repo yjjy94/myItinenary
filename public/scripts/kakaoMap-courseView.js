@@ -1,3 +1,5 @@
+// const res = require("express/lib/response");
+
 function makeOverlay(map, position, content) {
   var customOverlay = new kakao.maps.CustomOverlay({
     position: position,
@@ -9,9 +11,9 @@ function makeOverlay(map, position, content) {
 }
 
 function makeMarker(map, latlng) {
-  var imageSrc = "/assets/test.png", // 마커이미지의 주소입니다
-    imageSize = new kakao.maps.Size(30, 40), // 마커이미지의 크기입니다
-    imageOption = { offset: new kakao.maps.Point(15, 70) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+  var imageSrc = "/assets/marker.png", // 마커이미지의 주소입니다
+    imageSize = new kakao.maps.Size(32, 35), // 마커이미지의 크기입니다
+    imageOption = { offset: new kakao.maps.Point(15, 60) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
   var markerImage = new kakao.maps.MarkerImage(
     imageSrc,
@@ -27,7 +29,7 @@ function makeMarker(map, latlng) {
 
   return marker;
 }
-
+// used AJAX here cuz we need to get data from db after page loads
 async function getCourseDetailsClient() {
   let courseId = document.getElementById("courseId").value;
 
@@ -38,7 +40,6 @@ async function getCourseDetailsClient() {
       return;
     }
     const responseData = await response.json();
-    // console.log(responseData);
 
     var mapContainer = document.getElementById("map"), // 지도를 표시할 div
       mapOption = {
@@ -78,7 +79,14 @@ async function getCourseDetailsClient() {
 async function deleteCourse() {
   try {
     let courseId = document.getElementById("courseId").value;
+    let token = document
+      .querySelector('meta[name="csrf-token"]')
+      .getAttribute("content");
     const response = await fetch(`/user/viewcourse/${courseId}`, {
+      credentials: "same-origin", // <-- includes cookies in the request
+      headers: {
+        "CSRF-Token": token, // <-- is the csrf token as a header
+      },
       method: "DELETE",
     });
 

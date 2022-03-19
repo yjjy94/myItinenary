@@ -34,7 +34,6 @@ class Course {
   }
 
   static async findAll(userId) {
-    console.log(userId);
     const allCourse = await db
       .getDb()
       .collection("courses")
@@ -61,8 +60,6 @@ class Course {
       user_id: this.uid,
     };
     await db.getDb().collection("courses").insertOne(addCourse);
-    console.log("SAVE SUCCESS");
-    console.log(addCourse);
   }
 
   async updateById(productId) {
@@ -78,8 +75,6 @@ class Course {
         $set: addCourse,
       }
     );
-    console.log("UPDATE SUCCESS");
-    console.log(addCourse);
   }
 }
 

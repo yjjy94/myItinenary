@@ -7,7 +7,6 @@ class User {
   }
 
   async newSignUp() {
-    console.log("Here new SignUp");
     const securePassword = await bcrypt.hash(this.password, 12);
     await db.getDb().collection("users").insertOne({
       email: this.email,

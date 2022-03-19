@@ -71,7 +71,7 @@ function addToDataList() {
     });
   }
   courseListData.value = JSON.stringify(data);
-  console.log(courseListData.value);
+
   form.submit();
 }
 

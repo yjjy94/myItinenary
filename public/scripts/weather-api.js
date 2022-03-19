@@ -9,7 +9,6 @@ async function getWeather() {
     let result = await apiResponse.json();
     todayWeather = result.weather[0].main;
     todayTemp = result.main.temp;
-    console.log(todayWeather);
   } catch (error) {
     console.log(error);
   }

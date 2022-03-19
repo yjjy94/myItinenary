@@ -3,6 +3,7 @@ const courseController = require("../controllers/course-controller");
 const router = express.Router();
 
 router.get("/user/viewcourse/:id", courseController.getViewCourseView);
+// used AJAX here cuz we need to get data from db after page loads
 router.get(
   "/user/viewcourse/:id/getDetails",
   courseController.getCourseDetailsClient

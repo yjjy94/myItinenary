@@ -56,6 +56,11 @@ const renderSlides = () => {
   }
 
   let courseId = activeSlide.querySelector("#courseId").value;
+  let slideCourseTitle = activeSlide.querySelector("#courseTitle").innerText;
+  let viewCourseTitle = document.getElementById("viewCourseTitle");
+
+  viewCourseTitle.textContent = "";
+  viewCourseTitle.textContent += `${slideCourseTitle}`;
   viewCourseLink.href = `/user/viewcourse/${courseId}`;
 
   [].forEach.call(slides, function (slide) {

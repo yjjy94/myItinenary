@@ -12,8 +12,6 @@ let options = {
 function success(pos) {
   let crd = pos.coords;
   setupKakaoMap(crd.latitude, crd.longitude);
-
-  console.log("LAT: " + crd.latitude + " Long: " + crd.longitude);
 }
 
 function error(err) {
@@ -26,7 +24,7 @@ function setupKakaoMap(lat, long) {
       center: new kakao.maps.LatLng(lat, long), // 지도의 중심좌표
       level: 1, // 지도의 확대 레벨
     };
-  console.log("MAKE MAP");
+
   // 지도를 생성합니다
   map = new kakao.maps.Map(mapContainer, mapOption);
 
@@ -47,8 +45,7 @@ function searchPlaces() {
   }
 
   // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-  let res = ps.keywordSearch(keyword, placesSearchCB);
-  console.log(res);
+  ps.keywordSearch(keyword, placesSearchCB);
   return true;
 }
 
@@ -147,15 +144,19 @@ function getListItem(index, places) {
       places.y +
       '" />';
   // SET THE DRAGGABLE ATTRIBUTE HERE
-  el.setAttribute("draggable", true);
+
   el.setAttribute("id", "drag" + index);
-  el.setAttribute("ondragstart", "drag(event)");
-  el.setAttribute("ondragend", "dragEnd(event)");
   el.setAttribute("onclick", `panTo(${places.y},${places.x})`);
-  if (window.innerWidth < 1000) {
+
+  //if screen is mobile size, long press to add item instead of DnD
+  if (window.innerWidth < 1024) {
     onLongPress(el, () => {
       addToCourseList(el);
     });
+  } else {
+    el.setAttribute("draggable", true);
+    el.setAttribute("ondragstart", "drag(event)");
+    el.setAttribute("ondragend", "dragEnd(event)");
   }
 
   if (places.road_address_name) {
@@ -200,8 +201,7 @@ function onLongPress(element, callback) {
 
 function addToCourseList(el) {
   let data = el.closest("li").id;
-  console.log(data);
-  console.log("addToCourseList");
+
   let list = document.getElementById("courseList");
   let element = document.getElementById(data);
   let closeBtn = document.createElement("button");

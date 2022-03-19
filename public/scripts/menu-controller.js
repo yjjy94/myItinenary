@@ -11,10 +11,3 @@ function openCloseMenu() {
 
   navbar.classList.toggle("open");
 }
-
-// function checkScreenWidth(){
-//   let screenWidth = window.innerWidth;
-//   if(screenWidth >= 1024){
-//     let navbar = document.getElementById("navbar");
-//   }
-// }
