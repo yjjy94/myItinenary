@@ -39,7 +39,6 @@ app.use(courseRoutes);
 db.connectDb()
   .then(function () {
     app.listen(port);
-    console.log("DB CONNECTED");
   })
   .catch(function (error) {
     console.log(error);
