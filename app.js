@@ -10,7 +10,12 @@ const basicRoutes = require("./routes/basic-routes");
 const userRoutes = require("./routes/user-routes");
 const authRoutes = require("./routes/auth-routes");
 const courseRoutes = require("./routes/course-routes");
-const { add } = require("nodemon/lib/rules");
+
+let port = 8888;
+if (process.env.PORT) {
+  port = process.env.PORT;
+}
+
 const app = express();
 const sessionConfig = createSessionConfig();
 //FOR EJS
@@ -33,7 +38,7 @@ app.use(courseRoutes);
 
 db.connectDb()
   .then(function () {
-    app.listen(8888);
+    app.listen(port);
     console.log("DB CONNECTED");
   })
   .catch(function (error) {
