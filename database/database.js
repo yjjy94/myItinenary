@@ -6,7 +6,6 @@ let mongdbUrl = "mongodb://localhost:27017";
 
 if (process.env.MONGODB_URL) {
   mongdbUrl = process.env.MONGODB_URL;
-  console.log("process.env  " + mongdbUrl);
 }
 let database;
 
@@ -14,6 +13,7 @@ async function connectDb() {
   const client = await MongoClient.connect(mongdbUrl);
   // console.log(client);
   database = client.db("my-itinenary");
+  console.log("process.env  " + mongdbUrl);
   console.log("DB CONNECTED");
 }
 

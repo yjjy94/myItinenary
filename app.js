@@ -38,6 +38,7 @@ app.use(courseRoutes);
 
 db.connectDb()
   .then(function () {
+    console.log("===== Connecting to DB ... =====", port);
     app.listen(port);
   })
   .catch(function (error) {
