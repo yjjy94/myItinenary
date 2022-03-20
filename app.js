@@ -11,11 +11,6 @@ const userRoutes = require("./routes/user-routes");
 const authRoutes = require("./routes/auth-routes");
 const courseRoutes = require("./routes/course-routes");
 
-let port = 8888;
-if (process.env.PORT) {
-  port = process.env.PORT;
-}
-
 const app = express();
 const sessionConfig = createSessionConfig();
 //FOR EJS
