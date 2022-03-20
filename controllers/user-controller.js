@@ -28,7 +28,7 @@ async function getUserHomeView(req, res, next) {
 
 function getUserNewCourseView(req, res, next) {
   if (checkAuth(res)) {
-    res.render("user/newcourse");
+    res.render("user/newCourse");
   } else {
     res.redirect("/");
   }
