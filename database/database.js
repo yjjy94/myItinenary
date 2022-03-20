@@ -2,18 +2,19 @@ const mongodb = require("mongodb");
 
 const MongoClient = mongodb.MongoClient;
 
-let mongdbUrl = "mongodb://localhost:27017";
+let mongodbUrl = "mongodb://localhost:27017";
 
 if (process.env.MONGODB_URL) {
-  mongdbUrl = process.env.MONGODB_URL;
+  mongodbUrl = process.env.MONGODB_URL;
 }
+
 let database;
 
 async function connectDb() {
-  const client = await MongoClient.connect(mongdbUrl);
+  const client = await MongoClient.connect(mongodbUrl);
   // console.log(client);
   database = client.db("my-itinenary");
-  console.log("process.env  " + mongdbUrl);
+  console.log("process.env  " + mongodbUrl);
   console.log("DB CONNECTED");
 }
 

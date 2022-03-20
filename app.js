@@ -18,15 +18,6 @@ if (process.env.PORT) {
   port = process.env.PORT;
 }
 
-db.connectDb()
-  .then(function () {
-    console.log("===== Connecting to DB ... =====", port);
-    app.listen(port);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
 const sessionConfig = createSessionConfig();
 //FOR EJS
 app.set("view engine", "ejs"); //set to use ejs engine for rendering views
@@ -45,3 +36,12 @@ app.use(basicRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(courseRoutes);
+
+db.connectDb()
+  .then(function () {
+    console.log("===== Connecting to DB ... =====", port);
+    app.listen(port);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
