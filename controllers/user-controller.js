@@ -15,8 +15,6 @@ async function getUserHomeView(req, res, next) {
   if (checkAuth(res)) {
     try {
       const allCourses = await Course.findAll(res.locals.uid);
-
-      // console.log(res.locals.uid);
       res.render("user/userHome", { allCourses: allCourses });
     } catch (error) {
       return next(error);

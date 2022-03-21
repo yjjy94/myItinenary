@@ -4,6 +4,7 @@ function getLogInForm() {
 
   currentContainer.classList.replace("show", "hidden");
   divLogIn.classList.replace("hidden", "show");
+  removeErrorMsg();
 }
 
 function getSignUpForm() {
@@ -12,4 +13,10 @@ function getSignUpForm() {
 
   currentContainer.classList.replace("show", "hidden");
   divSignUp.classList.replace("hidden", "show");
+  removeErrorMsg();
+}
+
+function removeErrorMsg() {
+  let errorMsg = document.getElementById("errorMsg");
+  errorMsg.remove();
 }

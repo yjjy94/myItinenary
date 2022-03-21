@@ -53,6 +53,16 @@
           Sign Up
         </button>
       </div>
+      <% console.log(locals.errorMsg) %> 
+      <% if(locals.errorMsg){ %> 
+        <div
+        class="w-full text-xl text-white font-bold lg:text-2xl text-center py-1 lg:py-4"
+        id="errorMsg"
+        >
+      <h1><%=locals.errorMsg%></h1>
+      </div>
+      <% } %> 
+
       <!-- FOR STARTING -->
 
       <!-- FOR LOG IN -->
@@ -85,7 +95,7 @@
           </div>
         </div>
           <div class="w-3/4 text-lg lg:text-xl text-center py-3 lg:py-5">
-            <button class="py-2 lg:py-5 px-2 lg:px-10 rounded-xl bg-cyan-100">Log In</button>
+            <button class="py-2 lg:py-5 px-2 lg:px-10 rounded-xl bg-cyan-100" onclick="validate()">Log In</button>
             <button
               onclick="getSignUpForm()"
               class="py-2 lg:py-5 px-2 mt-3 lg:mt-0 lg:px-10 rounded-xl ml-5 bg-cyan-100"
@@ -120,6 +130,7 @@
             <input
               type="password"
               name="password"
+              minlength="6"
               class="w-3/5 text-sm lg:text-xl"
               required
             />
@@ -129,9 +140,10 @@
           >
             <label for="confirm-password">Confirm Password:</label>
             <input
-              type="text"
+              type="password"
               id="confirm-password"
               name="confirm-password"
+              minlength="6"
               class="w-3/4 lg:w-1/2 text-sm lg:text-xl"
               required
             />
@@ -143,7 +155,6 @@
               Log in instead!
             </button>
           </div>
-    
         </form>
       </div>
       <!-- FOR SIGN IN -->
